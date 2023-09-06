@@ -1,5 +1,4 @@
 --goals of things to add
---different way of multiplication (BxA and AxB options)
 --fractions and decimal support
 --also, if time, something that allows you to use an output as an input for the next thing
 
@@ -30,6 +29,7 @@ end
 function love.draw()
     love.graphics.clear(0.67,0.84,0.9,1)
     if mode=="start" then
+        love.graphics.print("Matrices Calculator",font30,250,150)
         love.graphics.print("Press enter to start!",font,270,200)
     elseif mode=="mat1sel1" then
         if rowssel==true then
@@ -43,6 +43,8 @@ function love.draw()
         love.graphics.setColor( 255, 255, 255, 1 )
         love.graphics.print(mat1rows,font,400,220)
         love.graphics.print(mat1columns,font,400,250)
+        love.graphics.print("Press up and down to change selection",font,200,10)
+        love.graphics.print("Press left and right to change values",font,200,40)
         love.graphics.print("Rows:",font,250,220)
         love.graphics.print("Columns:",font,250,250)
         love.graphics.print("Matrix A",font30,250,170)
@@ -56,6 +58,8 @@ function love.draw()
             love.graphics.rectangle("fill", 248,248, 170,26)
         end
         love.graphics.setColor( 255, 255, 255, 1 )
+        love.graphics.print("Press up and down to change selection",font,200,10)
+        love.graphics.print("Press left and right to change values",font,200,40)
         love.graphics.print(mat2rows,font,400,220)
         love.graphics.print(mat2columns,font,400,250)
         love.graphics.print("Rows:",font,250,220)
@@ -89,6 +93,7 @@ function love.draw()
         if negative then
             love.graphics.print("-",font30,280,300)
         end
+        love.graphics.print("Enter a value using number keys and then press enter when done",font,10,10)
     elseif mode=="mat2sel2" then
 		love.graphics.print(sel[2],font,10,80)
 		love.graphics.print(sel[1],font,10,40)
@@ -403,80 +408,49 @@ function update_inputnum()
 	if zerodown then
 		inputnum[digit]=0
 		digit=digit+1
-        finalinput=0
-        for i=1,#inputnum do 
-			finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
-		end
+        repeatedcode()
 	elseif onedown then
 		inputnum[digit]=1
 		digit=digit+1
-        finalinput=0
-        for i=1,#inputnum do 
-			finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
-		end
+        repeatedcode()
 	elseif twodown then
 		inputnum[digit]=2
 		digit=digit+1
-        finalinput=0
-        for i=1,#inputnum do 
-			finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
-		end
+        repeatedcode()
 	elseif threedown then
 		inputnum[digit]=3
 		digit=digit+1
-        finalinput=0
-        for i=1,#inputnum do 
-			finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
-		end
+        repeatedcode()
 	elseif fourdown then
 		inputnum[digit]=4
 		digit=digit+1
-        finalinput=0
-        for i=1,#inputnum do 
-			finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
-		end
+        repeatedcode()
 	elseif fivedown then
 		inputnum[digit]=5
 		digit=digit+1
-        finalinput=0
-        for i=1,#inputnum do 
-			finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
-		end
+        repeatedcode()
 	elseif sixdown then
 		inputnum[digit]=6
 		digit=digit+1
-        finalinput=0
-        for i=1,#inputnum do 
-			finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
-		end
+        repeatedcode()
 	elseif sevendown then
 		inputnum[digit]=7
 		digit=digit+1
-        finalinput=0
-        for i=1,#inputnum do 
-			finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
-		end
+        repeatedcode()
 	elseif eightdown then
 		inputnum[digit]=8
 		digit=digit+1
-        finalinput=0
-        for i=1,#inputnum do 
-			finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
-		end
+        repeatedcode()
 	elseif ninedown then
 		inputnum[digit]=9
 		digit=digit+1
-        finalinput=0
-        for i=1,#inputnum do 
-			finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
-		end
+        repeatedcode()
     elseif backspacedown then
         inputnum[#inputnum]=nil
-        digit=digit-1
-        finalinput=0
-        for i=1,#inputnum do 
-			finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
-		end
+        if digit>1 then
+            digit=digit-1
+        end
+        repeatedcode()
 	end
     if minusdown then
         if negative then 
@@ -513,6 +487,13 @@ function update_inputnum()
 	end
 end
 
+function repeatedcode()
+    finalinput=0
+    for i=1,#inputnum do 
+        finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
+    end
+end
+
 function update_modeselect()
     if downdown then
         sel[1]=sel[1]+1
@@ -536,17 +517,7 @@ function update_modeselect()
             end
             if mat1rows==mat2rows and mat1columns==mat2columns then
                 mode="displaycalc"
-                for r1=1,mat1rows do
-                    for c1=1,mat1columns do
-                        for r2=1,mat2columns do
-                            for c2=1,mat2rows do
-                                if r1==r2 and c1==c2 then
-                                    mat3[r1][c1]=mat1[r1][c1]+mat2[r1][c2]
-                                end
-                            end
-                        end
-                    end
-                end
+                matrixsubtraction(mat2rows,mat2columns,mat1columns,mat1rows,mat2,mat1,false)
             else
                 mode="undefined"
             end
@@ -561,7 +532,6 @@ function update_modeselect()
             end
             if mat1rows==mat2rows and mat1columns==mat2columns then
                 mode="submodesel"
-                
             else
                 mode="undefined"
             end
@@ -612,37 +582,15 @@ function update_matsel()
     if enterdown then
         mode="displaycalc"
         if sel[1]==1 then
-            for r=1,mat1rows do
-                for c=1,mat1columns do
-                    mat3[r][c]=mat1[r][c]*scalar
-                end
-            end
-            mat3rows=mat1rows
-            mat3columns=mat1columns
+            scalarmultiplication(mat1,mat1rows,mat1columns)
         elseif sel[1]==2 then
-            for r=1,mat2rows do
-                for c=1,mat2columns do
-                    mat3[r][c]=mat2[r][c]*scalar
-                end
-            end
-            mat3rows=mat2rows
-            mat3columns=mat2columns
+            scalarmultiplication(mat2,mat2rows,mat2columns)
         end
     end
 end
 
 function update_submodesel()
-    if downdown then
-        sel[1]=sel[1]+1
-    elseif updown then
-        sel[1]=sel[1]-1
-    end
-    if sel[1]<1 then
-        sel[1]=2
-    end
-    if sel[1]>2 then
-        sel[1]=1
-    end
+    update_basesel()
     for i = 0,mat1rows do
         mat3[i] = {}
         for j = 0,mat1columns do
@@ -652,43 +600,84 @@ function update_submodesel()
     if enterdown then
         mode="displaycalc"
         if sel[1]==1 then
-            if mat1rows==mat2rows and mat1columns==mat2columns then
-                for r1=1,mat1rows do
-                    for c1=1,mat1columns do
-                        for r2=1,mat2columns do
-                            for c2=1,mat2rows do
-                                if r1==r2 and c1==c2 then
-                                    mat3[r1][c1]=mat1[r1][c1]-mat2[r1][c2]
-                                end
-                            end
-                        end
-                    end
-                end
-            end
+            matrixsubtraction(mat1rows,mat1columns,mat2columns,mat2rows,mat1,mat2,true)
         else
-            if mat1rows==mat2rows and mat1columns==mat2columns then
-                mode="displaycalc"
-                for r1=1,mat2rows do
-                    for c1=1,mat2columns do
-                        for r2=1,mat1columns do
-                            for c2=1,mat1rows do
-                                if r1==r2 and c1==c2 then
-                                    mat3[r1][c1]=mat2[r1][c1]-mat1[r1][c2]
-                                end
-                            end
-                        end
-                    end
-                end
-            else
-                mode="undefined"
-            end
+            matrixsubtraction(mat2rows,mat2columns,mat1columns,mat1rows,mat2,mat1,true)
         end
-        mat3rows=mat1rows
-        mat3columns=mat3rows
     end
 end
 
 function update_multmodesel()
+    update_basesel()
+    if enterdown then
+        mode="displaycalc"
+        if sel[1]==1 then
+            matrixmultiplication(mat1rows,mat1columns,mat2rows,mat2columns,mat1,mat2)
+        else
+            matrixmultiplication(mat2rows,mat2columns,mat1rows,mat1columns,mat2,mat1)
+        end
+    end
+end
+
+function scalarmultiplication(matnum,matrows,matcolumns)
+    for r=1,matrows do
+        for c=1,matcolumns do
+            mat3[r][c]=matnum[r][c]*scalar
+        end
+    end
+    mat3rows=matrows
+    mat3columns=matcolumns
+end
+
+function matrixsubtraction(matrows,matcolumns,matcolumns2,matrows2,matsub1,matsub2,subyes)
+    if mat1rows==mat2rows and mat1columns==mat2columns then
+        for r1=1,matrows do
+            for c1=1,matcolumns do
+                for r2=1,matcolumns2 do
+                    for c2=1,matrows2 do
+                        if r1==r2 and c1==c2 then
+                            if subyess then
+                                mat3[r1][c1]=matsub1[r1][c1]-matsub2[r1][c2]
+                            else
+                                mat3[r1][c1]=matsub1[r1][c1]+matsub2[r1][c2]
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    else
+        mode="undefined"
+    end
+    mat3rows=mat1rows
+    mat3columns=mat1columns
+end
+
+function matrixmultiplication(matrows,matcolumns,matrows2,matcolumns2,matmult1,matmult2)
+    for i=1,matrows do
+        mat3[i] = {}
+        for j=1,matcolumns2 do
+            mat3[i][j]=0
+        end
+    end
+    if matcolumns==matrows2 then
+        for r1=1,matrows do
+            
+            for c2=1,matcolumns2 do
+                for r2=1,matrows2 do
+                    mat3[r1][c2]=mat3[r1][c2]+matmult1[r1][r2]*matmult2[r2][c2]
+
+                end
+            end
+        end
+    else
+        mode="undefined"
+    end
+    mat3rows=matrows
+    mat3columns=matcolumns2
+end
+
+function update_basesel()
     if downdown then
         sel[1]=sel[1]+1
     elseif updown then
@@ -699,52 +688,5 @@ function update_multmodesel()
     end
     if sel[1]>2 then
         sel[1]=1
-    end
-    if enterdown then
-        mode="displaycalc"
-        if sel[1]==1 then
-            for i=1,mat1rows do
-                mat3[i] = {}
-                for j=1,mat2columns do
-                    mat3[i][j]=0
-                end
-            end
-            if mat1columns==mat2rows then
-                for r1=1,mat1rows do
-                    
-                    for c2=1,mat2columns do
-                        for r2=1,mat2rows do
-                            mat3[r1][c2]=mat3[r1][c2]+mat1[r1][r2]*mat2[r2][c2]
-
-                        end
-                    end
-                end
-            mat3rows=mat1rows
-            mat3columns=mat2columns
-            else
-                mode="undefined"
-            end
-        else
-            for i=1,mat2rows do
-                mat3[i] = {}
-                for j=1,mat1columns do
-                    mat3[i][j]=0
-                end
-            end
-            if mat2columns==mat1rows then
-                for r1=1,mat2rows do
-                    for c2=1,mat1columns do
-                        for r2=1,mat1rows do
-                            mat3[r1][c2]=mat3[r1][c2]+mat2[r1][r2]*mat1[r2][c2]
-
-                        end
-                    end
-                end
-                mat3rows=mat2rows
-                mat3columns=mat1columns
-            else
-                mode="undefined"
-            end
-        end
     end
 end
