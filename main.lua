@@ -1,5 +1,4 @@
 --goals of things to add
---different way of multiplication (BxA and AxB options)
 --fractions and decimal support
 --also, if time, something that allows you to use an output as an input for the next thing
 
