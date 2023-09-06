@@ -4,7 +4,7 @@
 
 h1 {
     font-family: 'Rubik', sans-serif;
-    color: rgb( 11, 86, 117 );
+    color: rgb(35, 128, 115);
 }
 
 body {
@@ -30,7 +30,7 @@ a {
     text-decoration: none;
 }
 a:link {
-    color: rgb(31, 126, 114);
+    color: rgb(25, 103, 92);
 }
 a:visited {
     color: rgb(47, 208, 187);
