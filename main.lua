@@ -27,7 +27,7 @@ function love.load()
 end
 
 function love.draw()
-    love.graphics.clear(0.67,0.84,0.9,1)
+    love.graphics.clear(.557,.894,.686)
     if mode=="start" then
         love.graphics.print("Matrices Calculator",font30,250,150)
         love.graphics.print("Press enter to start!",font,270,200)
