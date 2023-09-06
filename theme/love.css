@@ -13,7 +13,7 @@ body {
     margin: 0;
     padding: none;
     background-color: rgb(133,220,186);
-    color: rgb(65,179,163);
+    color: rgb(43, 143, 130);
 }
 
 footer {
@@ -30,13 +30,13 @@ a {
     text-decoration: none;
 }
 a:link {
-    color: rgb( 233, 73, 154 );
+    color: rgb(27, 193, 171);
 }
 a:visited {
-    color: rgb( 110, 30, 71 );
+    color: rgb(43,143,130);
 }
 a:hover {
-    color: rgb( 252, 207, 230 );
+    color: rgb(86, 243, 222);
 }
 
 /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
