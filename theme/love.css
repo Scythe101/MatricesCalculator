@@ -30,10 +30,10 @@ a {
     text-decoration: none;
 }
 a:link {
-    color: rgb(27, 193, 171);
+    color: rgb(43,143,130);
 }
 a:visited {
-    color: rgb(43,143,130);
+    color: rgb(47, 208, 187);
 }
 a:hover {
     color: rgb(86, 243, 222);
