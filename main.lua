@@ -1,4 +1,5 @@
 --goals of things to add
+--different way of multiplication (BxA and AxB options)
 --fractions and decimal support
 --also, if time, something that allows you to use an output as an input for the next thing
 
@@ -182,7 +183,7 @@ function love.update(dt)
     elseif mode=="submodesel" then
         update_submodesel()
     end
-    perioddown,slashdown,downdown,rightdown,leftdown,updown,enterdown,zerodown,onedown,twodown,threedown,fourdown,fivedown,sixdown,sevendown,eightdown,ninedown,escdown,minusdown,spacedown=false
+    backspacedown,perioddown,slashdown,downdown,rightdown,leftdown,updown,enterdown,zerodown,onedown,twodown,threedown,fourdown,fivedown,sixdown,sevendown,eightdown,ninedown,escdown,minusdown,spacedown=false
 end
 function love.keypressed(key,scancode,isrepeat)
     if key=="down" then
@@ -225,6 +226,8 @@ function love.keypressed(key,scancode,isrepeat)
         slashdown=true
     elseif key=="." then
         perioddown=true
+    elseif key=="backspace" then
+        backspacedown=true
     end
 end
 function update_start()
@@ -467,7 +470,7 @@ function update_inputnum()
         for i=1,#inputnum do 
 			finalinput=finalinput+(inputnum[i])*((10^#inputnum)/(10^i))
 		end
-    elseif escdown then
+    elseif backspacedown then
         inputnum[#inputnum]=nil
         digit=digit-1
         finalinput=0
