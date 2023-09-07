@@ -1,4 +1,4 @@
-* {
+ * {
     box-sizing: border-box;
 }
 
@@ -30,9 +30,11 @@ a {
     text-decoration: none;
 }
 a:link {
+    color: rgb(25, 103, 92);
     color: rgb(2, 184, 160);
 }
 a:visited {
+    color: rgb(47, 208, 187);
     color: rgb(5, 103, 92);
 }
 a:hover {
