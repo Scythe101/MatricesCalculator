@@ -1,5 +1,6 @@
 --goals of things to add
 --fractions and decimal support
+--hi
 --also, if time, something that allows you to use an output as an input for the next thing
 
 function love.load()
