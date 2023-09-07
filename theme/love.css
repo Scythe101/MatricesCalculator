@@ -1,31 +1,18 @@
- * {
+* {
     box-sizing: border-box;
 }
 
 h1 {
-<<<<<<< HEAD
-    font-family: 'Rubik', sans-serif;
-    color: rgb(35, 128, 115);
-=======
     font-family: arial;
     color: rgb( 11, 86, 117 );
->>>>>>> parent of 72b520f (Edited HTML/CSS Stuffs)
 }
 
 body {
+    background-image: url(bg.png);
     background-repeat: no-repeat;
     font-family: arial;
     margin: 0;
     padding: none;
-<<<<<<< HEAD
-    background-color: rgb(133,220,186);
-    color: rgb(43, 143, 130);
-}
-
-footer {
-    font-family: 'Rubik', sans-serif;
-    font-size: 16px;
-=======
     background-color: rgb( 154, 205, 237 );
     color: rgb( 28, 78, 104 );
 }
@@ -33,7 +20,6 @@ footer {
 footer {
     font-family: arial;
     font-size: 12px;
->>>>>>> parent of 72b520f (Edited HTML/CSS Stuffs)
     padding-left: 10px;
     position:absolute;
     bottom: 0;
@@ -45,15 +31,13 @@ a {
     text-decoration: none;
 }
 a:link {
-    color: rgb(25, 103, 92);
-    color: rgb(2, 184, 160);
+    color: rgb( 233, 73, 154 );
 }
 a:visited {
-    color: rgb(47, 208, 187);
-    color: rgb(5, 103, 92);
+    color: rgb( 110, 30, 71 );
 }
 a:hover {
-    color: rgb(86, 243, 222);
+    color: rgb( 252, 207, 230 );
 }
 
 /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
